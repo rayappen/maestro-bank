@@ -1,0 +1,41 @@
+server:
+  port: 8090
+  servlet:
+    context-path: "/ecommerce/api/v1"
+
+spring:
+  application:
+    name: loan
+  datasource:
+    url: jdbc:mysql://localhost:3306/testdb?useSSL=false&serverTimezone=UTC
+    username: root
+    password: ''
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  sql:
+    init:
+      mode: always
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: none
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQLDialect
+  config:
+    import:
+      - "application_qa.yml"
+      - "application_prod.yml"
+  profiles:
+      active: "qa"
+
+build:
+  version: "3.0"
+
+loans:
+  message: "Welcome to EazyBank loans related local APIs "
+  contactDetails:
+    name: "Amaal Grega - Developer"
+    email: "amaal@eazybank.com"
+  onCallSupport:
+    - (452) 456-2176
+    - (546) 764-8934

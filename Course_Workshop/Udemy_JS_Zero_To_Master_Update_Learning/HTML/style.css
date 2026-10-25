@@ -1,0 +1,44 @@
+* {
+  margin: 0;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: pink;
+  font-family: cursive;
+}
+
+.first {
+  color: brown;
+}
+
+#your-name {
+  background-color: palevioletred;
+}
+
+.box {
+  width: 200px;
+  padding: 20px;
+  border: 5px solid black;
+  margin: 30px;
+}
+
+.zero {
+  border: 5px solid black;
+  margin: 5px;
+}
+
+input,
+button {
+  padding: 10px;
+  font-size: large;
+}
+
+#your-name p {
+  color: blue;
+}
+
+#username {
+  background-color: aquamarine;
+}

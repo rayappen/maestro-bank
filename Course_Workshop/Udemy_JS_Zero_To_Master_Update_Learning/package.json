@@ -1,0 +1,26 @@
+{
+  "name": "udemy_js_zero_to_master_update_learning",
+  "version": "1.0.0",
+  "description": "",
+  "license": "ISC",
+  "author": "",
+  "type": "commonjs",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "core-js": "^3.49.0",
+    "leaflet": "^1.9.4",
+    "lodash-es": "^4.18.1",
+    "regenerator-runtime": "^0.14.1"
+  },
+  "targets": {
+    "default": {
+      "outputFormat": "esmodule"
+    }
+  },
+  "devDependencies": {
+    "@parcel/transformer-sass": "^2.16.4",
+    "parcel": "^2.16.4"
+  }
+}

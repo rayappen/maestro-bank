@@ -1,0 +1,37 @@
+server:
+  port: 8071
+
+spring:
+  application:
+    name: "configserver"
+  profiles:
+    active: git
+#    active: native
+  cloud:
+    config: 
+      server:
+        git:
+          uri: "https://github.com/rayappen/spring-cloud-config.git"
+          default-label: main
+          timeout: 5
+          clone-on-start: true
+          force-pull: true
+        monitor:
+          validation-filter-enabled: false
+#        native:
+#          search-locations: "file:///C://Users//ajohnxav//Documents//Studies//master-microservices-with-spring-docker-kubernetes//Cloud Configuration - Approach - File Storage"
+#          search-locations: "classpath:config"
+#encrypt:
+#  key: "2aae6c35c94fcfb415dbe95f408b9ce91ee846ed"
+
+#management:
+#  endpoints:
+#    web:
+#      exposure:
+#        include: "*"
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "monitor,busrefresh,health"

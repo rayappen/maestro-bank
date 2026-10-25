@@ -1,0 +1,11 @@
+build:
+  version: "2.0"
+
+accounts:
+  message: "Welcome to Ecommerce accounts related Local APIs"
+  contactDetails:
+    name: "QA Pro - QA Lead"
+    email: "qapro@gmail.com"
+    onCallSupport:
+      - (666) 555-1234
+      - (666) 523-1345

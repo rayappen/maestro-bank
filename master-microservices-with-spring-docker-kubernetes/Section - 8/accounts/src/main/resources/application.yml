@@ -1,0 +1,80 @@
+#Server Configuration
+#DataSource Configuration
+
+server:
+  port: 8080
+  servlet:
+    context-path: "/ecommerce/api/v1"
+
+spring:
+  application:
+    name: "accounts"
+  profiles:
+    active: "prod"
+  config:
+    import: "configserver:http://localhost:8071/"
+  cloud:
+    config:
+      server:
+        monitor:
+          validation-filter-enabled: false 
+  datasource:
+    url: jdbc:mysql://localhost:3306/testdb?useSSL=false&serverTimezone=UTC
+    username: root
+    password: ''
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  sql:
+    init:
+      mode: always
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: none
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQLDialect
+  http:
+    serviceclient:
+      loans:
+        base-url: lb://loans
+      cards:
+        base-url: lb://cards
+#Comment:
+#  rabbitmq:
+#    host: "localhost"
+#    port: 15672
+#    username: "guest"
+#    password: "guest"
+        
+#management:
+#  endpoints:
+#    web:
+#      exposure:
+#        include: "*"
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "info,refresh,health,shutdown"
+  endpoint:
+    shutdown:
+      access: unrestricted
+  info:
+    env:
+      enabled: true
+
+eureka:
+  instance:
+    preferIpAddress: true #prefer-ip-address
+  client:
+    fetchRegistry: true
+    registerWithEureka: true
+    serviceUrl:
+      defaultZone: http://localhost:8070/eureka/
+
+info:
+  app:
+    name: "accounts"
+    description: "Ecommerce accounts application"
+    version: "1.0.0"

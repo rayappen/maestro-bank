@@ -1,0 +1,14 @@
+<configuration>
+    <include resource="org/springframework/boot/logging/logback/defaults.xml"/> #uses default logging method which we defined
+    <include resource="org/springframework/boot/logging/logback/console-appender.xml"/> #Injects the trace information to the default log
+    
+    <appender name="OpenTelemetry" class="io.opentelemetry.instrumentation.logback.appender.v1_0.OpenTelemetryAppender">
+        <mdcAttributesIncluded>*</mdcAttributesIncluded> #All the mdc attributes i.e every extra context
+        <captureCodeAttributes>true</captureCodeAttributes> #This enables description of class and methods it is originated from
+    </appender>
+    
+    <root level="INFO"> #One log two destinations
+        <appender-ref ref="CONSOLE"/> #For Printing
+        <appender-ref ref="OpenTelemetry"/> #For Log and Trace storage Also name mentioned in the appender above should match this value
+    </root>
+</configuration>

@@ -1,0 +1,115 @@
+#Server Configuration
+#DataSource Configuration
+
+server:
+  port: 8080
+  servlet:
+    context-path: "/ecommerce/api/v1"
+
+spring:
+  application:
+    name: "accounts"
+  profiles:
+    active: "prod"
+  config:
+    import: "configserver:http://localhost:8071/"
+  cloud:
+    config:
+      server:
+        monitor:
+          validation-filter-enabled: false 
+  datasource:
+    url: jdbc:mysql://localhost:3306/testdb?useSSL=false&serverTimezone=UTC
+    username: root
+    password: ''
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  sql:
+    init:
+      mode: always
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: none
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQLDialect
+  http:
+    serviceclient:
+      loans:
+        base-url: lb://loans
+      cards:
+        base-url: lb://cards
+#Comment:
+#  rabbitmq:
+#    host: "localhost"
+#    port: 15672
+#    username: "guest"
+#    password: "guest"
+        
+#management:
+#  endpoints:
+#    web:
+#      exposure:
+#        include: "*"
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  endpoint:
+    shutdown:
+      access: unrestricted
+  info:
+    env:
+      enabled: true
+
+eureka:
+  instance:
+    preferIpAddress: true #prefer-ip-address
+  client:
+    fetchRegistry: true
+    registerWithEureka: true
+    serviceUrl:
+      defaultZone: "http://localhost:8070/eureka/"
+
+info:
+  app:
+    name: "accounts"
+    description: "Ecommerce accounts application"
+    version: "1.0.0"
+
+logging:
+  pattern:
+    console: ${CONSOLE_LOG_PATTERN:%green(%d{HH:mm:ss.SSSS}) %blue(%-5level) %red([%thread]) %yellow(%logger{30}) - %cyan(%msg) %n}
+  level:
+    com:
+      eccomerce:
+        gatewayserver: DEBUG
+
+resilience4j.circuitbreaker:
+  configs:
+    default:
+      slidingWindowSize: 10
+      permittedNumberOfCallsInHalfOpenState: 2
+      failureRateThreshold: 50
+      waitDurationInOpenState: 10000
+
+resilience4j.retry:
+  configs:
+    default:
+      maxAttempts: 3
+      waitDuration: 500
+      enableExponentialBackOff: false
+      exponentialBackoffMultiplier: 2
+      ignoreExceptions:
+        - java.lang.NullPointerException
+      retryExceptions:
+        - java.util.concurrent.TimeoutException
+
+resilience4j.ratelimiter:
+  configs:
+    default:
+      timeOutDuration: 100
+      limitRefreshPeriod: 5000
+      limitForPeriod: 1

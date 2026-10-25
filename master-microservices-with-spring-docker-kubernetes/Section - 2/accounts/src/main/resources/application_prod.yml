@@ -1,0 +1,16 @@
+spring:
+  config:
+    activate:
+      on-profile: "prod"
+  
+build:
+  version: "1.0"
+
+accounts:
+  message: "Welcome to Ecommerce accounts related Prod APIs"
+  contactDetails:
+    name: "prod Pro - Product Owner"
+    email: "po@gmail.com"
+    onCallSupport:
+      - (424) 555-1234
+      - (424) 523-1345

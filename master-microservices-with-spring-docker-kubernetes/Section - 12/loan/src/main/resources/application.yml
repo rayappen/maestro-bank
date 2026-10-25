@@ -1,0 +1,62 @@
+server:
+  port: 8090
+  servlet:
+    context-path: "/ecommerce/api/v1"
+
+spring:
+  application:
+    name: "loans"
+  profiles:
+    active: "qa"
+  config:
+    import: "configserver:http://localhost:8071/"
+  datasource:
+    url: jdbc:mysql://localhost:3306/testdb?useSSL=false&serverTimezone=UTC
+    username: root
+    password: ''
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  sql:
+    init:
+      mode: always
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: none
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQLDialect
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "info,refresh,health,shutdown"
+  endpoint:
+    shutdown:
+      access: unrestricted
+  info:
+    env:
+      enabled: true
+
+eureka:
+  instance:
+    preferIpAddress: true #prefer-ip-address
+  client:
+    fetchRegistry: true
+    registerWithEureka: true
+    serviceUrl:
+      defaultZone: http://localhost:8070/eureka/
+
+info:
+  app:
+    name: "loans"
+    description: "Ecommerce loan application"
+    version: "1.0.0"
+
+logging:
+  pattern:
+    console: ${CONSOLE_LOG_PATTERN:%green(%d{HH:mm:ss.SSSS}) %blue(%-5level) %red([%thread]) %yellow(%logger{30}) - %cyan(%msg) %n}
+  level:
+    com:
+      eccomerce:
+        gatewayserver: DEBUG
